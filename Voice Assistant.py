@@ -10,14 +10,11 @@ engine.setProperty("rate", 150)  # Speaking speed
 
 def speak(text):
     print(f"Assistant: {text}")
-    engine.say(text) #Speak 
+    engine.say(text)
     engine.runAndWait()
 
 def listen():
     recognizer = sr.Recognizer()
-    #if True: 
-    #    command = input("Ask anything : ")
-    #    return command
     with sr.Microphone() as source:
         print("Listening...")
         recognizer.pause_threshold = 1
@@ -27,34 +24,34 @@ def listen():
         command = recognizer.recognize_google(audio).lower()
         print(f"You said: {command}")
     except sr.UnknownValueError:
-        speak("Sorry, I did not catch that. Can you repeat?")
+        speak("Sorry mishra ji , I did not catch that. Can you repeat?")
         return ""
     except sr.RequestError:
-        speak("Sorry, I am having trouble connecting.")
+        speak("Sorry mishra ji I am having trouble connecting.")
         return ""
     return command
 
 def greet_user():
     hour = datetime.datetime.now().hour
     if hour < 12:
-        speak("Good morning!")
+        speak("Good morning mishra ji")
     elif hour < 18:
-        speak("Good afternoon!")
+        speak("Good afternoon mishra ji!")
     else:
-        speak("Good evening!")
+        speak("Good evening mishra ji")
     speak("I am your assistant. How can I help you today?")
 
 def perform_task(command):
-    if "time" in command:
+    if "current time" in command:
         time_now = datetime.datetime.now().strftime("%I:%M %p")
-        speak(f"The current time is {time_now}")
-
-    elif "open youtube" in command:
-        speak("Opening YouTube")
+        speak(f"The current time is{time_now}") 
+    
+    elif"open youtube" in command:
+        speak("yes adarsh open youtube")
         webbrowser.open("https://www.youtube.com")
 
     elif "open google" in command:
-        speak("Opening Google")
+        speak("yes adarsh! open Google")
         webbrowser.open("https://www.google.com")
 
     elif "search" in command:
@@ -65,15 +62,15 @@ def perform_task(command):
         else:
             speak("What would you like to search for?")
 
-    elif "hello" in command or "hi" in command:
-        speak("Hello there! What can I do for you?")
+    elif "hello assistant how r u" in command or "hi" in command:
+        speak("Hello adarsh mishra i am fine  What can I do for you?")
 
     elif "exit" in command or "quit" in command or "stop" in command:
-        speak("Goodbye!")
+        speak("Goodbye bro")
         sys.exit()
 
     else:
-        speak("Sorry, I don't understand that command yet.")
+        speak("Sorry mishra ji, I don't understand that command yet.")
 
 # Main Program
 if __name__ == "__main__":
